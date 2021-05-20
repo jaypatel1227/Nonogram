@@ -4,14 +4,13 @@
     to figure out exactly which of the squares are supposed to be filled in. You are given two 
     lists as clues. The first list tells of you the the structure of the filled in spaces in each 
     of the rows. For example,
-            the row: "xxx--x---x" (where x is filled in and - is open) is given the clue (3,1,1).
+            the row: "■■■xx■xxx■" (where x is empty and ■ is filled) is given the clue (3,1,1).
     Similarly, the second list tells you the same structuce of the columns. Now, you may even get 
     the list in a state where some of the squares are alreadly filled in to makle this easier or 
     remove ambiguity in solutions. 
 '''
 from typing import Tuple
 import numpy as np
-from numpy.core.fromnumeric import shape
 
 # First is a class to represent a given game as just do the book keeping (not generate the game itself)
 class Nonogram():
@@ -30,15 +29,19 @@ class Nonogram():
                 case 0:
                     reutrn '?'
                 case 1:
-                    return '-'
+                    return '\u2610'
                 case 2:
-                    return 'x'
+                    return '\u25A0'
             '''
             return {0:'?', 1:'\u2610', 2:'\u25A0'}[i]
         return str(np.matrix([[symbols(i) for i in x] for x in self.game]))
     # changes the game to reveal a particular entry
-    def reveal(self, row, col) -> None:
+    # returns True if the square was filled in
+    # returns False if the square was empty
+    def reveal(self, row, col) -> bool:
         self.game[row,col] = self.key[row,col]
+        return self.key[row,col] == 2
+    # give a string representation of the key
     def key_repr(self):
         def symbols(i:np.int8): 
             ''' Here is a Python 3.10 version of this code (which is currently unreleased)
@@ -46,9 +49,9 @@ class Nonogram():
                 case 0:
                     reutrn '?'
                 case 1:
-                    return '-'
+                    return '\u2610'
                 case 2:
-                    return 'x'
+                    return '\u25A0'
             '''
             return {0:'?', 1:'\u2610', 2:'\u25A0'}[i]
         return str(np.matrix([[symbols(i) for i in x] for x in self.key]))
@@ -78,10 +81,10 @@ def find_pattern(line: np.array) -> list:
                 flag = True
         else:
             if flag:
-                res.append(count)
+                res.append(str(count))
                 count = 0
                 flag = False
     if flag:
-        res.append(count)
+        res.append(str(count))
     return res
 

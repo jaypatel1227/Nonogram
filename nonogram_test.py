@@ -2,7 +2,7 @@ import numpy  as np
 from nonogram import Nonogram, clues
 
 # We fix the game board to be of size n by n here
-GAMESIZE = 18
+GAMESIZE = 10
 
 # x = Nonogram(GAMESIZE, np.ones((GAMESIZE,GAMESIZE), np.int8)) # the empty board
 # for i in range(GAMESIZE):

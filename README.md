@@ -8,7 +8,7 @@ I have built a reasonably efficeint way of book keeping a particular game of non
 
 TODO:
 
-* make a GUI version that is playable
-* Write an algorithm to solve a Nonogram game (perhaps use this as _hint_ feature for the gui playable version)
-* Generate all nongrams of some size and do statistics on it
-* generalize to similar games
+* Make a GUI version that is playable
+* Write an algorithm to solve a Nonogram game (perhaps use this as a _hint_ feature for the GUI version)
+* Generate all nonograms of some size and do statistics on it
+* Generalize to similar games
